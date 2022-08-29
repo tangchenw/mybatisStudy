@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--日志信息的输出-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--自动将数据库下划线命名方式映射到java对象驼峰命名属性当中-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启mybatis二级缓存，默认开启-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <!--设置实体类所在的包的别名-->
+    <typeAliases>
+        <package name="tk.mybatis.simple.model"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="tk.mybatis.simple.type.EnabledTypeHandler" javaType="tk.mybatis.simple.type.Enabled"/>
+    </typeHandlers>
+    <!--interceptor属性为拦截器的全限定类名，如果需要参数，通过property标签进行配置，配置后的参数会通过setProperties方法传递给拦截器-->
+    <plugins>
+        <plugin interceptor="tk.mybatis.simple.plugin.CameHumpInterceptor"></plugin>
+<!--        <plugin interceptor="tk.mybatis.simple.plugin.XXXInterceptor">-->
+<!--            <property name="prop1" value="value1"/>-->
+<!--            <property name="prop2" value="value2"/>-->
+<!--        </plugin>-->
+        <plugin interceptor="tk.mybatis.simple.plugin.PageInterceptor">
+            <property name="dialect" value="tk.mybatis.simple.plugin.MySqlDialect"/>
+        </plugin>
+    </plugins>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC">
+                <property name="" value=""/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybaties?serverTimezone=Asia/Shanghai&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="MySQL" value="mysql"/>
+        <property name="PostgreSQL" value="postgresql"/>
+        <property name="Derby" value="derby"/>
+        <property name="HSQL" value="hsqldb"/>
+        <property name="H2" value="h2"/>
+    </databaseIdProvider>
+    <!--设置sql映射文件所在的位置-->
+    <!--太麻烦了，需要一个一个手动设置-->
+<!--    <mappers>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/CountryMapper.xml"/>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/UserMapper.xml"/>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/UserRoleMapper.xml"/>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/RoleMapper.xml"/>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/RolePrivilegeMapper.xml"/>-->
+<!--        <mapper resource="tk/mybatis/simple/mapper/PrivilegeMapper.xml"/>-->
+<!--    </mappers>-->
+    <!--直接配置映射文件包名-->
+    <mappers>
+        <package name="tk.mybatis.simple.mapper"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,6 @@
+tk\myabatis\simple\mapper\CountryMapperTest.class
+tk\myabatis\simple\mapper\RoleMapperTest.class
+tk\myabatis\simple\mapper\BaseMapperTest.class
+tk\myabatis\simple\mapper\UserMapperTest.class
+tk\myabatis\simple\mapper\CacheTest.class
+tk\myabatis\simple\mapper\PrivilegeMapperTest.class
