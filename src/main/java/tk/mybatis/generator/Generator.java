@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Generator {
     public static void main(String[] args) throws Exception {
-        //MBG执行过程中警告信息     add
+        //MBG执行过程中警告信息
         List<String> warnings = new ArrayList<>();
         //当生成的代码重复时，覆盖原代码
         boolean overwrite = true;
